@@ -3,6 +3,8 @@ import {
   LineChartOutlined,
   CodeSandboxOutlined,
   UserOutlined,
+  SlidersOutlined,
+  GlobalOutlined
 } from "@ant-design/icons";
 import { Layout, Menu, theme, Typography, Button } from "antd";
 import { NavLink } from "react-router-dom";
@@ -50,6 +52,16 @@ export const ProyectLayout = ({ children }) => {
               key: "3",
               icon: <CarOutlined />,
               label: <NavLink to="/choferes">CHOFERES</NavLink>,
+            },
+            {
+              key: "4",
+              icon: <SlidersOutlined/>,
+              label: <NavLink to="/config">Config</NavLink>,
+            },
+            {
+              key: "5",
+              icon: <GlobalOutlined/>,
+              label: <NavLink to="/estado">Estado</NavLink>,
             },
           ]}
         />

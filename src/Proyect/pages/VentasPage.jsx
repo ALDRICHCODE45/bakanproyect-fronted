@@ -4,10 +4,9 @@ import { PrivateView } from "../Routes/PrivateView";
 import { AddNewDocumentView } from "../components/AddNewDocumentView";
 
 export const VentasPage = () => {
-
   return (
     <ProyectLayout>
-      <PrivateView  Rol={ROLES.VENTAS} pageName='ventas' >
+      <PrivateView Rol={ROLES.VENTAS} pageName="ventas">
         <AddNewDocumentView />
       </PrivateView>
     </ProyectLayout>

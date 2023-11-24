@@ -2,7 +2,7 @@ import { Button, Space, Modal } from "antd";
 import { PlusOutlined, FormOutlined } from "@ant-design/icons";
 import { DocumentView } from "./DocumentView";
 import { useState } from "react";
-import {Navigate, useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const AddNewDocumentView = () => {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
@@ -14,7 +14,7 @@ export const AddNewDocumentView = () => {
   const cerrarModal = () => {
     setMostrarFormulario(false);
   };
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>
@@ -23,7 +23,11 @@ export const AddNewDocumentView = () => {
         <Button type="primary" icon={<PlusOutlined />} onClick={mostrarModal}>
           Nuevo Registro
         </Button>
-        <Button type="default" onClick={() => navigate('/estado')} icon={<FormOutlined />}>
+        <Button
+          type="default"
+          onClick={() => navigate("/estado")}
+          icon={<FormOutlined />}
+        >
           Ver Registros
         </Button>
       </Space>

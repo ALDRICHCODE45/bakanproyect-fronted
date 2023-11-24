@@ -4,12 +4,13 @@ import {
   CodeSandboxOutlined,
   UserOutlined,
   SlidersOutlined,
-  GlobalOutlined
+  GlobalOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme, Typography, Button } from "antd";
 import { NavLink } from "react-router-dom";
 import { useAuthStore } from "../../hooks/useAuthStore";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+// import "./index.css";
 
 const { Header, Content, Sider } = Layout;
 
@@ -24,14 +25,50 @@ export const ProyectLayout = ({ children }) => {
     startLogOutUser();
   }, []);
 
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <Layout
       style={{
-        height: "100vh",
+        minHeight: "100vh",
       }}
     >
-      <Sider breakpoint="lg" collapsedWidth="0">
-        <div className="demo-logo-vertical" />
+      <Sider
+        breakpoint="lg"
+        collapsedWidth={0}
+        style={{
+          zIndex: 10,
+          position: "fixed",
+          height: "100vh",
+          left: 0,
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "16px 0",
+          }}
+        >
+          <img
+            src="https://media.licdn.com/dms/image/C4E0BAQFZV3t8w-wK1w/company-logo_200_200/0/1630602791799/bakan_design_logo?e=2147483647&v=beta&t=E0CsEFRHAeLaqaCGRMGj7nSIeqmc4h6lDWZpXMa-Yko"
+            alt="Logo"
+            style={{ height: "90px", borderRadius:100 }}
+          />
+        </div>
         <Menu
           style={{ paddingTop: "20px" }}
           theme="dark"
@@ -55,46 +92,63 @@ export const ProyectLayout = ({ children }) => {
             },
             {
               key: "4",
-              icon: <SlidersOutlined/>,
+              icon: <SlidersOutlined />,
               label: <NavLink to="/config">Config</NavLink>,
             },
             {
               key: "5",
-              icon: <GlobalOutlined/>,
+              icon: <GlobalOutlined />,
               label: <NavLink to="/estado">Estado</NavLink>,
             },
           ]}
         />
       </Sider>
-      <Layout>
+      <Layout
+        className="custom-layout"
+        style={{
+          marginLeft: isSmallScreen ? 0 : 200,
+          width: isSmallScreen ? "100%" : "calc(100% - 200px)",
+        }}
+      >
         <Header
           style={{
-            padding: 0,
+            position: "fixed",
+            zIndex: 1,
+            width: isSmallScreen ? "100%" : "calc(100% - 200px)",
             background: colorBgContainer,
+            padding: "0 16px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
           }}
         >
-          <div style={{ paddingLeft: 20 }}>
-            <Button danger onClick={() => onLogOutUser()}>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Button
+              danger
+              onClick={() => onLogOutUser()}
+              style={{ marginLeft: 16 }}
+            >
               Salir
             </Button>
           </div>
-          <div style={{ display: "inline-flex" }}>
+          <div
+            style={{ display: "flex", alignItems: "center", marginRight: 16 }}
+          >
             <Typography.Title
               level={2}
-              style={{ fontSize: 17, color: "#518798", marginTop: 15 }}
+              style={{ fontSize: 17, color: "#518798", margin: 0 }}
             >
               {`${userName.toUpperCase()} - ${rol.toUpperCase()}`}
             </Typography.Title>
-            <UserOutlined
-              style={{ paddingRight: 35, paddingLeft: 15, fontSize: 28 }}
-            />
+            <UserOutlined style={{ fontSize: 28, marginLeft: 16 }} />
           </div>
         </Header>
-        <Content style={{ margin: "24px 16px 0" }}>
-          <div>{children}</div>
+        <Content style={{ margin: "24px 16px 0", overflowY: "auto" }}>
+          <section
+            style={{ maxWidth: "100%", maxHeight: "100%", paddingTop: 50 }}
+          >
+            {children}
+          </section>
         </Content>
       </Layout>
     </Layout>

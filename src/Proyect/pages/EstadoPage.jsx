@@ -1,41 +1,73 @@
 import { ProyectLayout } from "../Layout/ProyectLayout";
+import { Flex, Input } from "antd";
+import { PedidoCard } from "../components/PedidoCard";
+import { useProyect } from "../hooks/useProyect";
 import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
+  CheckCircleFilled,
+  WarningFilled,
+  ClockCircleFilled,
+  QuestionCircleFilled,
 } from "@ant-design/icons";
-import { Flex } from "antd";
-import { Avatar, Card } from "antd";
-const { Meta } = Card;
+
+const { Search } = Input;
 
 export const EstadoPage = () => {
+  const { products } = useProyect();
+  console.log(products);
+  const handleSearch = (value) => {
+    // Lógica para manejar la búsqueda
+    console.log("Realizando búsqueda:", value);
+  };
+
+  const IconosEstado = {
+    Entregado: (
+      <CheckCircleFilled
+        alt="icono"
+        style={{ fontSize: "20px", paddingTop: 10, color: "#98c379" }}
+      />
+    ),
+    "Con problemas": (
+      <WarningFilled
+        alt="icono"
+        style={{ fontSize: "20px", paddingTop: 10, color: "#b44a42" }}
+      />
+    ),
+    "En camino": (
+      <ClockCircleFilled
+        alt="icono"
+        style={{ fontSize: "20px", paddingTop: 10, color: "#55b6c2" }}
+      />
+    ),
+    Pendiente: (
+      <QuestionCircleFilled
+        alt="icono"
+        style={{ fontSize: "20px", paddingTop: 10, color: "#e5c07a" }}
+      />
+    ),
+  };
+
   return (
     <ProyectLayout>
-      <Flex wrap="wrap" gap="large">
-        {Array.from({ length: 20 }, (_, i) => (
-          <Card
-            hoverable
-            key={i}
-            cover={
-              <img
-                alt="example"
-                src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-              />
-            }
-            actions={[
-              <SettingOutlined key="setting" />,
-              <EditOutlined key="edit" />,
-              <EllipsisOutlined key="ellipsis" />,
-            ]}
-          >
-            <Meta
-              avatar={
-                <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />
-              }
-              title="Pedido 2"
-              description="asignado al chofer numero 3"
-            />
-          </Card>
+      <Flex
+        wrap="wrap"
+        style={{ paddingBottom: 40 }}
+        justify="center"
+        gap="large"
+      >
+        <Flex justify="center" style={{ marginBottom: "20px", width: "100%" }}>
+          <Search
+            placeholder="Buscar..."
+            enterButton="Buscar"
+            size="large"
+            onSearch={handleSearch}
+          />
+        </Flex>
+        {products?.map((product) => (
+          <PedidoCard
+            key={product.id}
+            {...product}
+            avatar={IconosEstado[product.estado]}
+          />
         ))}
       </Flex>
     </ProyectLayout>

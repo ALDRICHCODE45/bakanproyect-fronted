@@ -1,9 +1,9 @@
-import { Button, Space, Modal } from "antd";
+import { useState } from "react";
+import { Button, Space, Modal, Typography } from "antd";
 import { PlusOutlined, FormOutlined } from "@ant-design/icons";
 import { DocumentView } from "./DocumentView";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+const { Title } = Typography;
 export const AddNewDocumentView = () => {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
@@ -18,7 +18,9 @@ export const AddNewDocumentView = () => {
 
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>
-      <h1>Crea un nuevo registro</h1>
+      <Title level={3} style={{ marginBottom: "20px" }}>
+        Crea un nuevo registro
+      </Title>
       <Space size="large">
         <Button type="primary" icon={<PlusOutlined />} onClick={mostrarModal}>
           Nuevo Registro
@@ -27,13 +29,14 @@ export const AddNewDocumentView = () => {
           type="default"
           onClick={() => navigate("/estado")}
           icon={<FormOutlined />}
+          style={{ borderRadius: "8px"}}
         >
           Ver Registros
         </Button>
       </Space>
 
       <Modal
-        title="Mi Formulario"
+        title="Introduce los campos"
         open={mostrarFormulario}
         onCancel={cerrarModal}
         footer=""

@@ -1,15 +1,17 @@
-import { Form, Input, Button, Row, Col } from "antd";
+import { Form, Input, Button, Row, Col} from "antd";
 import { toast } from "sonner";
 
-export const DocumentView = ({cerrarModal}) => {
+export const DocumentView = ({ cerrarModal }) => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
     console.log("Valores del formulario:", values);
     // Puedes realizar acciones con los valores del formulario aquí
     form.resetFields();
-    toast.success("datos enviados");
-    cerrarModal()
+
+    cerrarModal();
+
+    toast.success("Usuario creado correctamente");
   };
   return (
     <Form form={form} layout="vertical" onFinish={onFinish}>
@@ -20,7 +22,7 @@ export const DocumentView = ({cerrarModal}) => {
           alignItems: "center",
         }}
       >
-        <Row  gutter={[16, 16]}>
+        <Row gutter={[16, 16]}>
           <Col span={12}>
             <Form.Item
               label="Campo 1"

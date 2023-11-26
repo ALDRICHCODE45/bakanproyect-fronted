@@ -1,16 +1,17 @@
+import { useCallback, useEffect, useState } from "react";
 import {
   CarOutlined,
   LineChartOutlined,
   CodeSandboxOutlined,
   UserOutlined,
-  SlidersOutlined,
+  SettingFilled,
   GlobalOutlined,
+  ShoppingFilled
 } from "@ant-design/icons";
 import { Layout, Menu, theme, Typography, Button } from "antd";
-import { NavLink } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
+
 import { useAuthStore } from "../../hooks/useAuthStore";
-import { useCallback, useEffect, useState } from "react";
-// import "./index.css";
 
 const { Header, Content, Sider } = Layout;
 
@@ -20,6 +21,7 @@ export const ProyectLayout = ({ children }) => {
   } = theme.useToken();
   const { user, startLogOutUser } = useAuthStore();
   const { userName, rol } = user;
+  const location = useLocation();
 
   const onLogOutUser = useCallback(() => {
     startLogOutUser();
@@ -66,39 +68,39 @@ export const ProyectLayout = ({ children }) => {
           <img
             src="https://media.licdn.com/dms/image/C4E0BAQFZV3t8w-wK1w/company-logo_200_200/0/1630602791799/bakan_design_logo?e=2147483647&v=beta&t=E0CsEFRHAeLaqaCGRMGj7nSIeqmc4h6lDWZpXMa-Yko"
             alt="Logo"
-            style={{ height: "90px", borderRadius:100 }}
+            style={{ height: "90px", borderRadius: 100 }}
           />
         </div>
         <Menu
           style={{ paddingTop: "20px" }}
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          selectedKeys={[location.pathname]}
           items={[
             {
-              key: "1",
-              icon: <LineChartOutlined />,
-              label: <NavLink to="/ventas">VENTAS</NavLink>,
+              key: "/ventas",
+              icon: <ShoppingFilled/>,
+              label: <Link to="/ventas">VENTAS</Link>,
             },
             {
-              key: "2",
+              key: "/embarques",
               icon: <CodeSandboxOutlined />,
-              label: <NavLink to="/embarques">EMBARQUES</NavLink>,
+              label: <Link to="/embarques">EMBARQUES</Link>,
             },
             {
-              key: "3",
+              key: "/choferes",
               icon: <CarOutlined />,
-              label: <NavLink to="/choferes">CHOFERES</NavLink>,
+              label: <Link to="/choferes">CHOFERES</Link>,
             },
             {
-              key: "4",
-              icon: <SlidersOutlined />,
-              label: <NavLink to="/config">Config</NavLink>,
+              key: "/config",
+              icon: <SettingFilled/>,
+              label: <Link to="/config">CONFIG</Link>,
             },
             {
-              key: "5",
+              key: "/estado",
               icon: <GlobalOutlined />,
-              label: <NavLink to="/estado">Estado</NavLink>,
+              label: <Link to="/estado">ESTADO</Link>,
             },
           ]}
         />
@@ -145,7 +147,7 @@ export const ProyectLayout = ({ children }) => {
         </Header>
         <Content style={{ margin: "24px 16px 0", overflowY: "auto" }}>
           <section
-            style={{ maxWidth: "100%", maxHeight: "100%", paddingTop: 50 }}
+            style={{ maxWidth: "100%", maxHeight: "100%", paddingTop: '70px' }}
           >
             {children}
           </section>

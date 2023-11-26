@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { ChoferesPage, EmbarquesPage, VentasPage, ConfigPage,EstadoPage } from "../pages";
+import { ChoferesPage, EmbarquesPage, VentasPage, ConfigPage,EstadoPage,ProductDetail } from "../pages";
 
 export const ProyectRouter = () => {
   return (
@@ -9,6 +9,7 @@ export const ProyectRouter = () => {
       <Route path="choferes" element={<ChoferesPage />} />
       <Route path="config" element={<ConfigPage/>} />
       <Route path="estado" element={<EstadoPage/>} />
+      <Route path="/product/:id" element={<ProductDetail/>} />
       <Route path="/*" element={<Navigate to="/ventas" />} />
     </Routes>
   );

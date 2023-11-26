@@ -3,4 +3,5 @@ export * from './VentasPage'
 export * from './ChoferesPage'
 export * from './ConfigPage'
 export * from './EstadoPage'
+export * from './ProductDetail'
 

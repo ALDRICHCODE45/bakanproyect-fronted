@@ -4,6 +4,7 @@ import { PlusOutlined, FormOutlined } from "@ant-design/icons";
 import { DocumentView } from "./DocumentView";
 import { useNavigate } from "react-router-dom";
 const { Title } = Typography;
+
 export const AddNewDocumentView = () => {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
@@ -29,7 +30,7 @@ export const AddNewDocumentView = () => {
           type="default"
           onClick={() => navigate("/estado")}
           icon={<FormOutlined />}
-          style={{ borderRadius: "8px"}}
+          style={{ borderRadius: "8px" }}
         >
           Ver Registros
         </Button>

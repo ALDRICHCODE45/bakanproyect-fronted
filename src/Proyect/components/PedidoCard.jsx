@@ -1,4 +1,3 @@
-import bakan from "../../assets/bakan6.png";
 import {
   EditOutlined,
   EllipsisOutlined,
@@ -7,7 +6,10 @@ import {
 
 import { Card } from "antd";
 import { useEffect, useState } from "react";
+
 import { useNavigate } from "react-router-dom";
+
+import bakan from "../../assets/bakan6.png";
 const { Meta } = Card;
 
 export const PedidoCard = ({ titulo, estado, id, avatar }) => {

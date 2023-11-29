@@ -3,11 +3,12 @@ import { PrivateView } from "../Routes/PrivateView";
 import { useState } from "react";
 import { UserTable } from "../components/UserTable";
 import { FormCreateUser } from "../components/FormCreateUser";
+import { ROLES } from "../../auth/roles";
 
 export const ConfigPage = () => {
   const [data, setData] = useState([
-    { key: Math.random(), name: "Gerardo", rol: "ventas" },
-    { key: Math.random(), name: "Aldrich", rol: "admin" },
+    { key: Math.random(), name: "Aldrich", rol: ROLES.ADMIN },
+    { key: Math.random(), name: "Gerardo", rol: ROLES.CHOFERES },
   ]);
 
   return (

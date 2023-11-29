@@ -1,13 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { products } from "./products";
+// import { products } from "./products";
 
 export const ProyectSlice = createSlice({
   name: "AuthSlice",
   initialState: {
-    status: "not-authenticated", // 'checking' | 'authenticated | 'not-authenticated
-    products: products,
+    products: null,
     errorMessage: null,
   },
-  reducers: {},
+  reducers: {
+    removeProductsLogOut: (state) => {
+      state.products = [];
+    },
+    loadProducts: (state, { payload }) => {
+      state.products = payload;
+    },
+  },
 });
-export const {} = ProyectSlice.actions;
+export const { removeProductsLogOut, loadProducts } = ProyectSlice.actions;

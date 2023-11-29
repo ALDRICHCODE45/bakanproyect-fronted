@@ -1,7 +1,7 @@
 import "../../assets/loginAssets/css/owl.carousel.min.css";
 import "../../assets/loginAssets/css/bootstrap.min.css";
 import "../../assets/loginAssets/css/style.css";
-import backgoroud from "../../assets/logo90.png";
+import backgoroud from "../../assets/LoginLogo.png";
 import { useForm } from "react-hook-form";
 import { useAuthStore } from "../../hooks/useAuthStore";
 
@@ -45,7 +45,7 @@ export const LoginPage = () => {
                       type="text"
                       className="form-control"
                       placeholder="Nombre de usuario"
-                      id="username"
+                      id=""
                       {...register("userName", {
                         required: {
                           value: true,

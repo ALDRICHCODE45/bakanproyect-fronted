@@ -1,17 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 import {
   CarOutlined,
-  LineChartOutlined,
   CodeSandboxOutlined,
   UserOutlined,
   SettingFilled,
   GlobalOutlined,
-  ShoppingFilled
+  ShoppingFilled,
+  ExclamationCircleOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, theme, Typography, Button } from "antd";
+import { Layout, Menu, theme, Typography, Button, Modal } from "antd";
 import { useLocation, Link } from "react-router-dom";
-
+import logo from "../../assets/bakan6.png";
 import { useAuthStore } from "../../hooks/useAuthStore";
+const { confirm } = Modal;
 
 const { Header, Content, Sider } = Layout;
 
@@ -24,7 +25,16 @@ export const ProyectLayout = ({ children }) => {
   const location = useLocation();
 
   const onLogOutUser = useCallback(() => {
-    startLogOutUser();
+    confirm({
+      title: `¿Seguro que quieres salir?`,
+      icon: <ExclamationCircleOutlined />,
+      okText: "Sí",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        startLogOutUser();
+      },
+    });
   }, []);
 
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
@@ -66,7 +76,7 @@ export const ProyectLayout = ({ children }) => {
           }}
         >
           <img
-            src="https://media.licdn.com/dms/image/C4E0BAQFZV3t8w-wK1w/company-logo_200_200/0/1630602791799/bakan_design_logo?e=2147483647&v=beta&t=E0CsEFRHAeLaqaCGRMGj7nSIeqmc4h6lDWZpXMa-Yko"
+            src={logo}
             alt="Logo"
             style={{ height: "90px", borderRadius: 100 }}
           />
@@ -79,7 +89,7 @@ export const ProyectLayout = ({ children }) => {
           items={[
             {
               key: "/ventas",
-              icon: <ShoppingFilled/>,
+              icon: <ShoppingFilled />,
               label: <Link to="/ventas">VENTAS</Link>,
             },
             {
@@ -94,7 +104,7 @@ export const ProyectLayout = ({ children }) => {
             },
             {
               key: "/config",
-              icon: <SettingFilled/>,
+              icon: <SettingFilled />,
               label: <Link to="/config">CONFIG</Link>,
             },
             {
@@ -147,7 +157,7 @@ export const ProyectLayout = ({ children }) => {
         </Header>
         <Content style={{ margin: "24px 16px 0", overflowY: "auto" }}>
           <section
-            style={{ maxWidth: "100%", maxHeight: "100%", paddingTop: '70px' }}
+            style={{ maxWidth: "100%", maxHeight: "100%", paddingTop: "70px" }}
           >
             {children}
           </section>

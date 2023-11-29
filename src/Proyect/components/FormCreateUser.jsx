@@ -1,5 +1,6 @@
-import { Form, Input, Button, Row, Col, Card, message } from "antd";
+import { Form, Input, Button, Row, Col, Card, Select, notification } from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
+import { ROLES } from "../../auth/roles";
 
 export const FormCreateUser = ({ setData }) => {
   const [form] = Form.useForm();
@@ -18,7 +19,9 @@ export const FormCreateUser = ({ setData }) => {
       /* handle error */
       console.log(e);
     }
-    message.success({ message: "Usuario Creado correctamente" });
+    notification.success({
+      message: `Usuario ${values.username} creado con éxito`,
+    });
     form.resetFields();
   };
   return (
@@ -52,7 +55,12 @@ export const FormCreateUser = ({ setData }) => {
               name="rol"
               rules={[{ required: true, message: "Ingrese el Rol de usuario" }]}
             >
-              <Input />
+              <Select>
+                <Select.Option value={ROLES.ADMIN}>ADMIN</Select.Option>
+                <Select.Option value={ROLES.CHOFERES}>CHOFERES</Select.Option>
+                <Select.Option value={ROLES.EMBARQUES}>EMBARQUES</Select.Option>
+                <Select.Option value={ROLES.VENTAS}>VENTAS</Select.Option>
+              </Select>
             </Form.Item>
 
             <Form.Item

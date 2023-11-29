@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { checkingCredentials, logOut, login } from "../store/Auth/AuthSlice";
 import { useCallback } from "react";
+import { loadProducts, removeProductsLogOut } from "../store";
+import { products } from "../store/Proyect/products";
 
 export const useAuthStore = () => {
   const dispatch = useDispatch();
@@ -13,6 +15,7 @@ export const useAuthStore = () => {
       try {
         const user = { userName, password, rol };
         dispatch(login(user));
+        dispatch(loadProducts(products));
       } catch (e) {
         /* handle error */
         dispatch(logOut("no se pudo iniciar sesion"));
@@ -25,6 +28,7 @@ export const useAuthStore = () => {
     setTimeout(() => {
       try {
         dispatch(logOut());
+        dispatch(removeProductsLogOut());
       } catch (e) {
         /* handle error */
         console.log(e);

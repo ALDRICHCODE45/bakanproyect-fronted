@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import {
   CarOutlined,
-  CodeSandboxOutlined,
   UserOutlined,
   SettingFilled,
   GlobalOutlined,
@@ -26,7 +25,7 @@ export const ProyectLayout = ({ children }) => {
 
   const onLogOutUser = useCallback(() => {
     confirm({
-      title: `¿Seguro que quieres salir?`,
+      title: `¿Seguro que quieres salir de la aplicacion?`,
       icon: <ExclamationCircleOutlined />,
       okText: "Sí",
       okType: "danger",
@@ -92,11 +91,11 @@ export const ProyectLayout = ({ children }) => {
               icon: <ShoppingFilled />,
               label: <Link to="/ventas">VENTAS</Link>,
             },
-            {
-              key: "/embarques",
-              icon: <CodeSandboxOutlined />,
-              label: <Link to="/embarques">EMBARQUES</Link>,
-            },
+            // {
+            //   key: "/embarques",
+            //   icon: <CodeSandboxOutlined />,
+            //   label: <Link to="/embarques">EMBARQUES</Link>,
+            // },
             {
               key: "/choferes",
               icon: <CarOutlined />,

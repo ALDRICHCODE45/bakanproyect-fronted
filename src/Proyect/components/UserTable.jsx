@@ -63,6 +63,7 @@ export const UserTable = ({ data, setData }) => {
   return (
     <>
       <Table
+        rowClassName="animate__animated animate__fadeInUp"
         style={{ paddingTop: 30 }}
         dataSource={data}
         columns={columns}

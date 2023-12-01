@@ -3,6 +3,7 @@ import { UploadOutlined } from "@ant-design/icons";
 import {ROLES} from "../../auth/roles";
 import {useAuthStore} from "../../hooks/useAuthStore";
 import {useState} from "react";
+import {EmptyData} from "./EmptyData";
 const {Title} = Typography
 
 export const UploadImages = () => {

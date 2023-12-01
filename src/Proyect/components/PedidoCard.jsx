@@ -5,14 +5,20 @@ import {
 } from "@ant-design/icons";
 
 import { Card } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
 import bakan from "../../assets/bakan6.png";
 const { Meta } = Card;
 
-export const PedidoCard = ({ titulo, estado, id, avatar }) => {
+export const PedidoCard = ({
+  descripcionProducto,
+  estado,
+  id,
+  avatar,
+  entidadFederativaAlcaldia,
+}) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -20,8 +26,25 @@ export const PedidoCard = ({ titulo, estado, id, avatar }) => {
       setLoading(false);
     }, 3000);
   }, []);
+
+  const newTitle = useMemo(() => {
+    return descripcionProducto.length > 17
+      ? descripcionProducto.substring(0, 17) + "..."
+      : descripcionProducto;
+  }, [descripcionProducto]);
+
+  const newDescription = useMemo(() => {
+    entidadFederativaAlcaldia;
+    return `${estado} | ${
+      entidadFederativaAlcaldia.length > 10
+        ? entidadFederativaAlcaldia.substring(0, 10) + "..."
+        : entidadFederativaAlcaldia
+    }`;
+  }, []);
+
   return (
     <Card
+      className="animate__animated animate__fadeInLeft "
       loading={loading}
       hoverable
       cover={
@@ -40,7 +63,7 @@ export const PedidoCard = ({ titulo, estado, id, avatar }) => {
         <EllipsisOutlined key="ellipsis" />,
       ]}
     >
-      <Meta avatar={avatar} title={titulo} description={estado} />
+      <Meta avatar={avatar} title={newTitle} description={newDescription} />
     </Card>
   );
 };

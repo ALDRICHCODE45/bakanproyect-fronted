@@ -1,5 +1,16 @@
-import { Form, Input, Button, Row, Col} from "antd";
-import { toast } from "sonner";
+import {
+  Button,
+  Form,
+  Input,
+  DatePicker,
+  Row,
+  Space,
+  notification,
+  Modal,
+  Col,
+} from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+const { confirm } = Modal;
 
 export const DocumentView = ({ cerrarModal }) => {
   const [form] = Form.useForm();
@@ -7,131 +18,169 @@ export const DocumentView = ({ cerrarModal }) => {
   const onFinish = (values) => {
     console.log("Valores del formulario:", values);
     // Puedes realizar acciones con los valores del formulario aquí
-    form.resetFields();
 
-    cerrarModal();
-
-    toast.success("Usuario creado correctamente");
+    confirm({
+      title: `Se requiere confirmacion`,
+      icon: <ExclamationCircleOutlined />,
+      okText: "Confirmar",
+      okType: "primary",
+      cancelText: "cancelar",
+      onOk() {
+        cerrarModal();
+        form.resetFields();
+        notification.success({
+          message: `Registro creado`,
+          description:
+            "puedes consultar los registros en el apartado de ESTADO",
+        });
+      },
+    });
   };
+
+  const handleCancel = () => {
+    confirm({
+      title: `¿Seguro que quieres cancelar este registro?`,
+      icon: <ExclamationCircleOutlined />,
+      okText: "Sí",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        cerrarModal();
+        notification.error({
+          message: `Registro cancelado`,
+        });
+      },
+    });
+  };
+
   return (
-    <Form form={form} layout="vertical" onFinish={onFinish}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-        }}
-      >
-        <Row gutter={[16, 16]}>
-          <Col span={12}>
-            <Form.Item
-              label="Campo 1"
-              name="campo1"
-              rules={[
-                { required: true, message: "Por favor, ingresa el Campo 1" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
+    <Form form={form} onFinish={onFinish} layout="vertical">
+      <Row gutter={16}>
+        <Col span={12}>
+          <Form.Item
+            label="Nombre del documento"
+            name="nombreDocumento"
+            rules={[
+              {
+                required: true,
+                message: "Por favor, ingrese el nombre del documento",
+              },
+            ]}
+          >
+            <Input className="animate__animated animate__fadeInUp" />
+          </Form.Item>
 
-            <Form.Item
-              label="Campo 3"
-              name="campo3"
-              rules={[
-                { required: true, message: "Por favor, ingresa el Campo 3" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
+          <Form.Item
+            label="campo3"
+            name="campo3"
+            rules={[
+              {
+                required: true,
+                message: "Por favor, ingrese el campo3",
+              },
+            ]}
+          >
+            <Input className="animate__animated animate__fadeInUp" />
+          </Form.Item>
 
-            <Form.Item
-              label="Campo 5"
-              name="campo5"
-              rules={[
-                { required: true, message: "Por favor, ingresa el Campo 5" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
+          <Form.Item
+            label="campo5"
+            name="campo5"
+            rules={[
+              {
+                required: true,
+                message: "Por favor, ingrese el campo5",
+              },
+            ]}
+          >
+            <Input className="animate__animated animate__fadeInUp" />
+          </Form.Item>
 
-            <Form.Item
-              label="Campo 7"
-              name="campo7"
-              rules={[
-                { required: true, message: "Por favor, ingresa el Campo 7" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
-              label="Campo 2"
-              name="campo2"
-              rules={[
-                { required: true, message: "Por favor, ingresa el Campo 2" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
+          <Form.Item
+            label="campo7"
+            name="campo7"
+            rules={[
+              {
+                required: true,
+                message: "Por favor, ingrese el campo7",
+              },
+            ]}
+          >
+            <Input className="animate__animated animate__fadeInUp" />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item
+            label="Fecha del documento"
+            name="fechaDocumento"
+            rules={[
+              {
+                required: true,
+                message: "Por favor, ingrese la fecha del documento",
+              },
+            ]}
+          >
+            <DatePicker
+              style={{ width: "100%" }}
+              className="animate__animated animate__fadeInUp"
+            />
+          </Form.Item>
 
-            <Form.Item
-              label="Campo 4"
-              name="campo4"
-              rules={[
-                { required: true, message: "Por favor, ingresa el Campo 4" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
+          <Form.Item
+            label="campo4"
+            name="campo4"
+            rules={[
+              {
+                required: true,
+                message: "Por favor, ingrese el campo4",
+              },
+            ]}
+          >
+            <Input className="animate__animated animate__fadeInUp" />
+          </Form.Item>
 
-            <Form.Item
-              label="Campo 6"
-              name="campo6"
-              rules={[
-                { required: true, message: "Por favor, ingresa el Campo 6" },
-              ]}
-            >
-              <Input />
-            </Form.Item>
+          <Form.Item
+            label="campo6"
+            name="campo6"
+            rules={[
+              {
+                required: true,
+                message: "Por favor, ingrese el campo6",
+              },
+            ]}
+          >
+            <Input className="animate__animated animate__fadeInUp" />
+          </Form.Item>
 
-            <Form.Item
-              label="Campo 8"
-              name="campo8"
-              rules={[
-                { required: true, message: "Por favor, ingresa el Campo 8" },
-                <Form.Item
-                  label="Campo 3"
-                  name="campo3"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Por favor, ingresa el Campo 1",
-                    },
-                  ]}
-                >
-                  <Input />
-                </Form.Item>,
-              ]}
-            >
-              <Input />
-            </Form.Item>
-          </Col>
-          {/* Repite este bloque para los demás campos */}
-        </Row>
-      </div>
+          <Form.Item
+            label="campo8"
+            name="campo8"
+            rules={[
+              {
+                required: true,
+                message: "Por favor, ingrese el campo8",
+              },
+            ]}
+          >
+            <Input className="animate__animated animate__fadeInUp" />
+          </Form.Item>
+        </Col>
+      </Row>
+      {/* Otros campos del formulario para el nuevo registro */}
 
-      <Form.Item
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignContent: "center",
-        }}
-        wrapperCol={{ span: 16 }}
-      >
-        <Button type="primary" htmlType="submit">
-          Enviar
-        </Button>
+      <Form.Item>
+        <Space>
+          <Button
+            danger
+            onClick={() => handleCancel()}
+            style={{ marginLeft: "auto" }}
+          >
+            Cancelar
+          </Button>
+          <Button type="primary" htmlType="submit">
+            Crear Registro
+          </Button>
+        </Space>
       </Form.Item>
     </Form>
   );

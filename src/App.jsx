@@ -5,7 +5,6 @@ export const ProyectApp = () => {
   return (
     <>
       <Toaster expand richColors position="top-center" />
-
       <AppRouter />
     </>
   );

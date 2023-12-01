@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Table, Tag, Space, Button, Modal, Form, Select } from "antd";
-import { EditOutlined } from "@ant-design/icons";
+import { EditOutlined, ZoomInOutlined } from "@ant-design/icons";
+import { useAuthStore } from "../../hooks/useAuthStore";
+import { useProyect } from "../hooks/useProyect";
+import { useNavigate } from "react-router-dom";
 
 export const TareasAsignadas = () => {
+  const { user } = useAuthStore();
+  const { products } = useProyect();
+  const { userName } = user;
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
+  const navigate = useNavigate();
 
   const estadosColores = {
     "En camino": "blue",
@@ -15,9 +22,9 @@ export const TareasAsignadas = () => {
 
   const columns = [
     {
-      title: "TAREAS ASIGNADAS",
-      dataIndex: "tarea",
-      key: "tarea",
+      title: `ASIGNACIONES PARA ${userName.toUpperCase()}`,
+      dataIndex: "descripcionProducto",
+      key: "descripcionProducto",
     },
     {
       title: "ESTADO",
@@ -37,86 +44,16 @@ export const TareasAsignadas = () => {
           >
             Editar
           </Button>
+
+          <Button
+            type="dashed"
+            icon={<ZoomInOutlined />}
+            onClick={() => handleDetails(record)}
+          >
+            Detalles
+          </Button>
         </Space>
       ),
-    },
-  ];
-
-  const data = [
-    {
-      key: "1",
-      tarea: "Entregar paquetes",
-      estado: "En camino",
-    },
-    {
-      key: "2",
-      tarea: "Recoger mercancía",
-      estado: "Entregado",
-    },
-    {
-      key: "3",
-      tarea: "Realizar entrega especial",
-      estado: "Pendiente",
-    },
-    {
-      key: "4",
-      tarea: "Revisar inventario",
-      estado: "En camino",
-    },
-    {
-      key: "5",
-      tarea: "Coordinar logística de envíos",
-      estado: "Pendiente",
-    },
-    {
-      key: "6",
-      tarea: "Visitar proveedores",
-      estado: "Entregado",
-    },
-    {
-      key: "7",
-      tarea: "Organizar rutas de entrega",
-      estado: "En camino",
-    },
-    {
-      key: "8",
-      tarea: "Atender llamadas de clientes",
-      estado: "Pendiente",
-    },
-    {
-      key: "9",
-      tarea: "Resolver problemas de logística",
-      estado: "Entregado",
-    },
-    {
-      key: "10",
-      tarea: "Planificar nuevas estrategias de entrega",
-      estado: "Con problemas",
-    },
-    {
-      key: "11",
-      tarea: "Realizar análisis de mercado",
-      estado: "En camino",
-    },
-    {
-      key: "12",
-      tarea: "Preparar informe de ventas",
-      estado: "Pendiente",
-    },
-    {
-      key: "13",
-      tarea: "Coordinar reunión de equipo",
-      estado: "En camino",
-    },
-    {
-      key: "14",
-      tarea: "Enviar propuestas a clientes",
-      estado: "Pendiente",
-    },
-    {
-      key: "15",
-      tarea: "Actualizar documentación interna",
-      estado: "Entregado",
     },
   ];
 
@@ -125,14 +62,40 @@ export const TareasAsignadas = () => {
     setModalVisible(true);
   };
 
+  const handleDetails = (record) => {
+    navigate(`/product/${record.id}`);
+  };
+
   const handleModalCancel = () => {
     setSelectedRow(null);
     setModalVisible(false);
   };
+  const removeSpecialCharacters = (str) => {
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^\w\s]/gi, "");
+  };
+
+  const cleanString = (str) =>
+    removeSpecialCharacters(str.trim().toUpperCase());
+
+  const newProducts = useCallback(
+    products
+      .filter(
+        (product) => cleanString(product.chofer) === cleanString(userName)
+      )
+      .map((filteredProduct) => ({ ...filteredProduct, key: Math.random() })),
+    [products, userName]
+  );
 
   return (
     <div>
-      <Table columns={columns} dataSource={data} />
+      <Table
+        rowClassName="animate__animated animate__fadeInDown"
+        columns={columns}
+        dataSource={newProducts}
+      />
       <Modal
         title="Cambia el estado"
         open={modalVisible}

@@ -1,4 +1,13 @@
-import { Form, Input, Button, Row, Col, Card, Select, notification } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Row,
+  Col,
+  Card,
+  Select,
+  notification,
+} from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
 import { ROLES } from "../../auth/roles";
 
@@ -47,7 +56,10 @@ export const FormCreateUser = ({ setData }) => {
                 { required: true, message: "Ingrese el nombre de usuario" },
               ]}
             >
-              <Input prefix={<UserAddOutlined />} />
+              <Input
+                className="animate__animated animate__fadeInUp"
+                prefix={<UserAddOutlined />}
+              />
             </Form.Item>
 
             <Form.Item
@@ -55,7 +67,7 @@ export const FormCreateUser = ({ setData }) => {
               name="rol"
               rules={[{ required: true, message: "Ingrese el Rol de usuario" }]}
             >
-              <Select>
+              <Select className="animate__animated animate__fadeInUp">
                 <Select.Option value={ROLES.ADMIN}>ADMIN</Select.Option>
                 <Select.Option value={ROLES.CHOFERES}>CHOFERES</Select.Option>
                 <Select.Option value={ROLES.EMBARQUES}>EMBARQUES</Select.Option>
@@ -73,7 +85,7 @@ export const FormCreateUser = ({ setData }) => {
                 },
               ]}
             >
-              <Input.Password />
+              <Input.Password className="animate__animated animate__fadeInUp" />
             </Form.Item>
 
             <Form.Item>

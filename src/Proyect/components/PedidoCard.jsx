@@ -21,10 +21,11 @@ export const PedidoCard = ({
 }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 500);
   }, []);
 
   const newTitle = useMemo(() => {
@@ -34,17 +35,16 @@ export const PedidoCard = ({
   }, [descripcionProducto]);
 
   const newDescription = useMemo(() => {
-    entidadFederativaAlcaldia;
     return `${estado} | ${
       entidadFederativaAlcaldia.length > 10
         ? entidadFederativaAlcaldia.substring(0, 10) + "..."
         : entidadFederativaAlcaldia
     }`;
-  }, []);
+  }, [entidadFederativaAlcaldia]);
 
   return (
     <Card
-      className="animate__animated animate__fadeInLeft "
+      className="animate__animated animate__fadeIn "
       loading={loading}
       hoverable
       cover={

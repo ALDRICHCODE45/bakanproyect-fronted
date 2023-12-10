@@ -14,17 +14,19 @@ export const useAuthStore = () => {
     setTimeout(() => {
       try {
         const user = { userName, password, rol };
+        localStorage.setItem("user", JSON.stringify(user));
         dispatch(login(user));
         dispatch(loadProducts(products));
       } catch (e) {
         /* handle error */
         dispatch(logOut("no se pudo iniciar sesion"));
       }
-    }, 2000);
+    }, 500);
   }, []);
 
   const startLogOutUser = useCallback(() => {
     dispatch(checkingCredentials());
+    localStorage.removeItem("user");
     setTimeout(() => {
       try {
         dispatch(logOut());
@@ -36,10 +38,23 @@ export const useAuthStore = () => {
     }, 2000);
   }, []);
 
+  const checkinAuthentication = useCallback(() => {
+    const user = localStorage.getItem("user");
+    if (!user) {
+      return dispatch(logOut());
+    } else {
+      dispatch(loadProducts(products));
+      dispatch(login(JSON.parse(user)));
+    }
+  }, []);
+
   return {
-    status,
-    user,
+    //methods
     startLoginUser,
     startLogOutUser,
+    checkinAuthentication,
+    //values
+    status,
+    user,
   };
 };

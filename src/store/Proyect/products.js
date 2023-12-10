@@ -14,7 +14,7 @@ export const products = [
   {
     id: 2,
     descripcionProducto: "Surtir de 80 sillas a Walmart",
-    chofer: "Ana Gomez",
+    chofer: "luis hernandez",
     fechaEntrega: "2023-01-02",
     noCamioneta: "XYZ456",
     CalleNumeroColonia: "Calle Juárez #456, Col. Juárez",
@@ -80,7 +80,7 @@ export const products = [
     CalleNumeroColonia: "Av. Independencia #901, Col. Independencia",
     entidadFederativaAlcaldia: "Guadalajara, Jalisco",
     imagenes: ["url19.jpg", "url20.jpg", "url21.jpg"],
-    estado: "Con problemas",
+    estado: "Pendiente",
     acompanantes: ["Javier Pérez", "Ana Ramírez"],
   },
   {

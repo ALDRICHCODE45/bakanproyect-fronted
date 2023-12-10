@@ -14,6 +14,7 @@ import { EmptyData } from "../components/EmptyData";
 
 import { ROLES } from "../../auth/roles";
 import { useAuthStore } from "../../hooks/useAuthStore";
+import { useMemo } from "react";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -23,9 +24,16 @@ export const AsignDriver = () => {
   const { user } = useAuthStore();
   const { rol } = user;
 
-  const puedeAsignarChofer = rol === ROLES.ADMIN || rol === ROLES.EMBARQUES;
+  const puedeAsignarChofer = useMemo(
+    () => rol === ROLES.ADMIN || rol === ROLES.EMBARQUES,
+    [rol]
+  );
+
   return (
-    <Card style={{ marginTop: "20px" }}>
+    <Card
+      className="animate__animated animate__fadeInUp"
+      style={{ marginTop: "20px" }}
+    >
       <Title level={4}>Asignar Chofer</Title>
       {puedeAsignarChofer ? (
         <Form layout="vertical">
@@ -53,7 +61,6 @@ export const AsignDriver = () => {
                 <Select placeholder="Selecciona un Chofer">
                   <Option value="chofer1">Chofer 1</Option>
                   <Option value="chofer2">Chofer 2</Option>
-                  {/* Puedes agregar más Options según tus necesidades */}
                 </Select>
               </Form.Item>
             </Col>

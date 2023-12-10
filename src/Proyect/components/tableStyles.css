@@ -1,0 +1,17 @@
+@media screen and (max-width: 600px) {
+  .ant-table {
+    overflow-x: auto;
+  }
+  .ant-table-column-title {
+    font-size: 14px;
+  }
+  .ant-space {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .ant-space-item {
+    margin-bottom: 8px;
+  }
+}

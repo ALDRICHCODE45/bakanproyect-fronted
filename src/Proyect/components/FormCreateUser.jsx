@@ -56,10 +56,7 @@ export const FormCreateUser = ({ setData }) => {
                 { required: true, message: "Ingrese el nombre de usuario" },
               ]}
             >
-              <Input
-                className="animate__animated animate__fadeInUp"
-                prefix={<UserAddOutlined />}
-              />
+              <Input prefix={<UserAddOutlined />} />
             </Form.Item>
 
             <Form.Item
@@ -67,7 +64,7 @@ export const FormCreateUser = ({ setData }) => {
               name="rol"
               rules={[{ required: true, message: "Ingrese el Rol de usuario" }]}
             >
-              <Select className="animate__animated animate__fadeInUp">
+              <Select>
                 <Select.Option value={ROLES.ADMIN}>ADMIN</Select.Option>
                 <Select.Option value={ROLES.CHOFERES}>CHOFERES</Select.Option>
                 <Select.Option value={ROLES.EMBARQUES}>EMBARQUES</Select.Option>
@@ -85,7 +82,7 @@ export const FormCreateUser = ({ setData }) => {
                 },
               ]}
             >
-              <Input.Password className="animate__animated animate__fadeInUp" />
+              <Input.Password />
             </Form.Item>
 
             <Form.Item>

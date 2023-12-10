@@ -67,7 +67,7 @@ export const DocumentView = ({ cerrarModal }) => {
               },
             ]}
           >
-            <Input className="animate__animated animate__fadeInUp" />
+            <Input className="animate__animated animate__fadeIn" />
           </Form.Item>
 
           <Form.Item
@@ -80,7 +80,7 @@ export const DocumentView = ({ cerrarModal }) => {
               },
             ]}
           >
-            <Input className="animate__animated animate__fadeInUp" />
+            <Input className="animate__animated animate__fadeIn" />
           </Form.Item>
 
           <Form.Item
@@ -93,7 +93,7 @@ export const DocumentView = ({ cerrarModal }) => {
               },
             ]}
           >
-            <Input className="animate__animated animate__fadeInUp" />
+            <Input className="animate__animated animate__fadeIn" />
           </Form.Item>
 
           <Form.Item
@@ -106,7 +106,7 @@ export const DocumentView = ({ cerrarModal }) => {
               },
             ]}
           >
-            <Input className="animate__animated animate__fadeInUp" />
+            <Input className="animate__animated animate__fadeIn" />
           </Form.Item>
         </Col>
         <Col span={12}>
@@ -122,7 +122,7 @@ export const DocumentView = ({ cerrarModal }) => {
           >
             <DatePicker
               style={{ width: "100%" }}
-              className="animate__animated animate__fadeInUp"
+              className="animate__animated animate__fadeIn"
             />
           </Form.Item>
 
@@ -136,7 +136,7 @@ export const DocumentView = ({ cerrarModal }) => {
               },
             ]}
           >
-            <Input className="animate__animated animate__fadeInUp" />
+            <Input className="animate__animated animate__fadeIn" />
           </Form.Item>
 
           <Form.Item
@@ -149,7 +149,7 @@ export const DocumentView = ({ cerrarModal }) => {
               },
             ]}
           >
-            <Input className="animate__animated animate__fadeInUp" />
+            <Input className="animate__animated animate__fadeIn" />
           </Form.Item>
 
           <Form.Item
@@ -162,7 +162,7 @@ export const DocumentView = ({ cerrarModal }) => {
               },
             ]}
           >
-            <Input className="animate__animated animate__fadeInUp" />
+            <Input className="animate__animated animate__fadeIn" />
           </Form.Item>
         </Col>
       </Row>

@@ -8,16 +8,18 @@ import {
   ClockCircleFilled,
   QuestionCircleFilled,
 } from "@ant-design/icons";
+import { useCallback } from "react";
 
 const { Search } = Input;
 
 export const EstadoPage = () => {
   const { products } = useProyect();
-  console.log(products);
-  const handleSearch = (value) => {
+
+  const handleSearch = useCallback((value) => {
     // Lógica para manejar la búsqueda
     console.log("Realizando búsqueda:", value);
-  };
+    console.log(products)
+  }, []);
 
   const IconosEstado = {
     Entregado: (

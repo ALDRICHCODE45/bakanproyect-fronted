@@ -1,4 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useLocation, Link } from "react-router-dom";
+
+import { Layout, Menu, theme, Typography, Button, Modal } from "antd";
 import {
   CarOutlined,
   UserOutlined,
@@ -7,19 +10,18 @@ import {
   ShoppingFilled,
   ExclamationCircleOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, theme, Typography, Button, Modal } from "antd";
-import { useLocation, Link } from "react-router-dom";
+
+const { confirm } = Modal;
+const { Header, Content, Sider } = Layout;
+
 import logo from "../../assets/bakan6.png";
 import { useAuthStore } from "../../hooks/useAuthStore";
-const { confirm } = Modal;
-
-const { Header, Content, Sider } = Layout;
 
 export const ProyectLayout = ({ children }) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  const { user, startLogOutUser } = useAuthStore();
+  const { startLogOutUser, user } = useAuthStore();
   const { userName, rol } = user;
   const location = useLocation();
 
@@ -40,7 +42,7 @@ export const ProyectLayout = ({ children }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 768);
+      setIsSmallScreen(window.innerWidth < 600);
     };
 
     window.addEventListener("resize", handleResize);
@@ -49,6 +51,17 @@ export const ProyectLayout = ({ children }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const newUserName = useMemo(() => {
+    const newUser = userName.split(" ");
+    if (newUser.length > 1) {
+      return `${newUser[0].toUpperCase()} ${newUser[1]
+        .substring(0, 3)
+        .toUpperCase()}... | ${rol.toUpperCase()}`;
+    } else {
+      return `${newUser[0].toUpperCase()} | ${rol.toUpperCase()}`;
+    }
+  }, [userName]);
 
   return (
     <Layout
@@ -118,7 +131,7 @@ export const ProyectLayout = ({ children }) => {
         className="custom-layout"
         style={{
           marginLeft: isSmallScreen ? 0 : 200,
-          width: isSmallScreen ? "100%" : "calc(100% - 200px)",
+          width: isSmallScreen ? "100%" : "calc(100% - 300px)",
         }}
       >
         <Header
@@ -149,7 +162,7 @@ export const ProyectLayout = ({ children }) => {
               level={2}
               style={{ fontSize: 17, color: "#518798", margin: 0 }}
             >
-              {`${userName.toUpperCase()} - ${rol.toUpperCase()}`}
+              {newUserName}
             </Typography.Title>
             <UserOutlined style={{ fontSize: 28, marginLeft: 16 }} />
           </div>

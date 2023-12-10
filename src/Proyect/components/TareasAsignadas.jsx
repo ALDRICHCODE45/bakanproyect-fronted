@@ -4,10 +4,11 @@ import { EditOutlined, ZoomInOutlined } from "@ant-design/icons";
 import { useAuthStore } from "../../hooks/useAuthStore";
 import { useProyect } from "../hooks/useProyect";
 import { useNavigate } from "react-router-dom";
+import "./tableStyles.css";
 
 export const TareasAsignadas = () => {
   const { user } = useAuthStore();
-  const { products } = useProyect();
+  const { products,cleanString } = useProyect();
   const { userName } = user;
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
@@ -22,7 +23,7 @@ export const TareasAsignadas = () => {
 
   const columns = [
     {
-      title: `ASIGNACIONES PARA ${userName.toUpperCase()}`,
+      title: `ASIGNACIONES`,
       dataIndex: "descripcionProducto",
       key: "descripcionProducto",
     },
@@ -66,23 +67,15 @@ export const TareasAsignadas = () => {
     navigate(`/product/${record.id}`);
   };
 
-  const handleModalCancel = () => {
+  const handleModalCancel = useCallback(() => {
     setSelectedRow(null);
     setModalVisible(false);
-  };
-  const removeSpecialCharacters = (str) => {
-    return str
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^\w\s]/gi, "");
-  };
+  }, []);
 
-  const cleanString = (str) =>
-    removeSpecialCharacters(str.trim().toUpperCase());
 
   const newProducts = useCallback(
     products
-      .filter(
+      ?.filter(
         (product) => cleanString(product.chofer) === cleanString(userName)
       )
       .map((filteredProduct) => ({ ...filteredProduct, key: Math.random() })),
@@ -90,7 +83,7 @@ export const TareasAsignadas = () => {
   );
 
   return (
-    <div>
+    <div style={{ overflowX: "auto" }}>
       <Table
         rowClassName="animate__animated animate__fadeInDown"
         columns={columns}

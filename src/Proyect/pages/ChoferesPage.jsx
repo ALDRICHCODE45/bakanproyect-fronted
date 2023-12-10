@@ -1,14 +1,13 @@
 import { ProyectLayout } from "../Layout/ProyectLayout";
-import { PrivateView } from "../Routes/PrivateView";
-import { ROLES } from "../../auth/roles";
-import {TareasAsignadas} from "../components/TareasAsignadas";
+import { TareasAsignadas } from "../components/TareasAsignadas";
+import { OnlyChoferesView } from "../Routes/OnlyChoferesView";
 
 export const ChoferesPage = () => {
   return (
     <ProyectLayout>
-      <PrivateView Rol={ROLES.CHOFERES} pageName="choferes">
-        <TareasAsignadas/>
-      </PrivateView>
+      <OnlyChoferesView>
+        <TareasAsignadas />
+      </OnlyChoferesView>
     </ProyectLayout>
   );
 };

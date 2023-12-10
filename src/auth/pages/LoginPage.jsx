@@ -16,6 +16,7 @@ export const LoginPage = () => {
   const onSubmit = handleSubmit((data) => {
     try {
       startLoginUser(data);
+      console.log(data)
     } catch (e) {
       /* handle error */
       console.log("ha ocurrido un error");

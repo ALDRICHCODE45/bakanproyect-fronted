@@ -1,9 +1,12 @@
+import { useState } from "react";
+
 import { Card, Upload, Typography } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+
 import { ROLES } from "../../auth/roles";
 import { useAuthStore } from "../../hooks/useAuthStore";
-import { useState } from "react";
 import { EmptyData } from "./EmptyData";
+
 const { Title } = Typography;
 
 export const UploadImages = () => {
@@ -14,7 +17,10 @@ export const UploadImages = () => {
   const puedeSubirImagenes = rol === ROLES.ADMIN || rol === ROLES.CHOFERES;
 
   return (
-    <Card className="animate__animated animate__fadeInUp" style={{ marginTop: "20px" }}>
+    <Card
+      className="animate__animated animate__fadeInUp"
+      style={{ marginTop: "20px" }}
+    >
       <Title level={4}>Subir Imágenes</Title>
       {puedeSubirImagenes ? (
         <Upload

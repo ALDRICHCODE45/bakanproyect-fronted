@@ -10,6 +10,7 @@ import {
   Col,
 } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
+
 const { confirm } = Modal;
 
 export const DocumentView = ({ cerrarModal }) => {

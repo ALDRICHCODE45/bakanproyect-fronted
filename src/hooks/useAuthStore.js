@@ -1,6 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import { checkingCredentials, logOut, login } from "../store/Auth/AuthSlice";
 import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { checkingCredentials, logOut, login } from "../store/Auth/AuthSlice";
 import { loadProducts, removeProductsLogOut } from "../store";
 import { products } from "../store/Proyect/products";
 

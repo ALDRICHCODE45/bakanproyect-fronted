@@ -1,14 +1,16 @@
 import { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { Table, Tag, Space, Button, Modal, Form, Select } from "antd";
 import { EditOutlined, ZoomInOutlined } from "@ant-design/icons";
+
 import { useAuthStore } from "../../hooks/useAuthStore";
 import { useProyect } from "../hooks/useProyect";
-import { useNavigate } from "react-router-dom";
 import "./tableStyles.css";
 
 export const TareasAsignadas = () => {
   const { user } = useAuthStore();
-  const { products,cleanString } = useProyect();
+  const { products, cleanString } = useProyect();
   const { userName } = user;
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
@@ -71,7 +73,6 @@ export const TareasAsignadas = () => {
     setSelectedRow(null);
     setModalVisible(false);
   }, []);
-
 
   const newProducts = useCallback(
     products

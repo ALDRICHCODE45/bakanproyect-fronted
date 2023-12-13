@@ -1,13 +1,12 @@
+import { useNavigate } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+
 import {
   EditOutlined,
   EllipsisOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-
 import { Card } from "antd";
-import { useEffect, useMemo, useState } from "react";
-
-import { useNavigate } from "react-router-dom";
 
 import bakan from "../../assets/bakan6.png";
 const { Meta } = Card;

@@ -1,4 +1,6 @@
-import { useState, useCallback, useEffect } from "react";
+import { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   Input,
   Table,
@@ -18,60 +20,30 @@ import {
   EditOutlined,
   ZoomInOutlined,
 } from "@ant-design/icons";
-import { useProyect } from "../hooks/useProyect";
+
 import "./tableStyles.css";
-import { useLocation, useNavigate } from "react-router-dom";
-import queryString from "query-string";
+import { useSearch } from "../hooks/useSearch";
 
 const { Column } = Table;
 
 export const AdminChoferes = () => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const {
+    handleSearch,
+    handleSearchInputChange,
+    searchTerm,
+    selectedDriver,
+    tableAnimationClass,
+  } = useSearch();
 
-  const { fetchProducts } = useProyect();
-  const { q = "" } = queryString.parse(location.search);
-
-  const [searchTerm, setSearchTerm] = useState(q);
-  const [selectedDriver, setSelectedDriver] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
-  const [tableAnimationClass, setTableAnimationClass] = useState("");
-
-  const showSearch = q.length === 0;
-  const showError = q.length > 0 && selectedDriver?.length === 0;
 
   const estadosColores = {
     "En camino": "blue",
     Entregado: "green",
     Pendiente: "gold",
     "Con problemas": "red",
-  };
-
-  const handleSearch = async () => {
-    try {
-      // Realiza la búsqueda de productos
-      const driverdata = await fetchProducts(searchTerm);
-
-      // Actualiza la URL después de que se han obtenido los datos
-      navigate(`?q=${searchTerm}`);
-
-      // Elimina la clase de animación antes de actualizar los datos
-      setTableAnimationClass("");
-
-      // Actualiza el estado con los datos obtenidos
-      setSelectedDriver(driverdata);
-
-      // Agrega la clase de animación después de actualizar los datos
-      setTableAnimationClass("animate__animated animate__fadeInUp");
-    } catch (error) {
-      // Manejo de errores si es necesario
-      console.error("Error al buscar productos:", error);
-    }
-  };
-
-  const handleSearchInputChange = (e) => {
-    setSearchTerm(e.target.value);
   };
 
   const handleEdit = (record) => {
@@ -89,14 +61,6 @@ export const AdminChoferes = () => {
     setSelectedRow(null);
   }, []);
 
-  useEffect(() => {
-    // Esta función se ejecuta al montar el componente
-    return () => {
-      // Esta función se ejecuta al desmontar el componente
-      useLocation.search = ""; // Limpiar parámetros de consulta
-    };
-  }, []);
-
   return (
     <div className="admin-view-container">
       <div className="search-container">
@@ -110,23 +74,26 @@ export const AdminChoferes = () => {
       </div>
 
       <Result
-        status="500"
-        title={`el chofer ${q} no existe`}
-        subTitle="asegurese de escribir correctamente"
-        style={{ display: showError ? "" : "none" }}
+        status="404"
+        title={`introduce un  nombre de usuario`}
+        style={{ display: searchTerm === "" ? "" : "none" }}
       />
       <Result
-        status="404"
-        subTitle="introduce un nombre de usuario"
-        style={{ display: showSearch ? "" : "none" }}
+        status="500"
+        title={`el chofer ${searchTerm} no existe`}
+        subTitle="asegúrese de escribir correctamente"
+        style={{
+          display: searchTerm && selectedDriver?.length === 0 ? "" : "none",
+        }}
       />
 
       {selectedDriver?.length > 0 && (
         <div className="driver-info-container">
           <div className="driver-info">
-            <Space size={12}>
+            <Space style={{ display: "flex", justifyContent: "center" }}>
               <Image
                 width={100}
+                className={`animate__animated ${tableAnimationClass}`}
                 src={
                   selectedDriver?.avatar ||
                   `https://cdn-icons-png.flaticon.com/512/4140/4140039.png`
@@ -141,7 +108,12 @@ export const AdminChoferes = () => {
               />
             </Space>
             <Typography.Title
-              style={{ paddingLeft: 4, paddingTop: 12 }}
+              className={`animate__animated ${tableAnimationClass}`}
+              style={{
+                paddingTop: 12,
+                display: "flex",
+                justifyContent: "center",
+              }}
               level={5}
             >
               {selectedDriver?.[0]?.chofer.toUpperCase()}
@@ -157,7 +129,7 @@ export const AdminChoferes = () => {
               pagination={false}
             >
               <Column
-                title="Tareas"
+                title="ASIGNACIONES"
                 dataIndex="descripcionProducto"
                 key="descripcionProducto"
               />

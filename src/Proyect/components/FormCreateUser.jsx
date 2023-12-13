@@ -9,6 +9,7 @@ import {
   notification,
 } from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
+
 import { ROLES } from "../../auth/roles";
 
 export const FormCreateUser = ({ setData }) => {
@@ -29,7 +30,7 @@ export const FormCreateUser = ({ setData }) => {
       console.log(e);
     }
     notification.success({
-      message: `Usuario ${values.username} creado con éxito`,
+      message: `Usuario creado con éxito`,
     });
     form.resetFields();
   };

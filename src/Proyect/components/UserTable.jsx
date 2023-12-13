@@ -18,8 +18,8 @@ export const UserTable = ({ data, setData }) => {
       onOk() {
         const newData = data.filter((item) => item.key !== record.key);
         setData(newData);
-        notification.success({
-          message: `Usuario ${record.name} eliminado con éxito`,
+        notification.error({
+          message: `Usuario eliminado`,
         });
       },
     });

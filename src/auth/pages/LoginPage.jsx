@@ -16,7 +16,7 @@ export const LoginPage = () => {
   const onSubmit = handleSubmit((data) => {
     try {
       startLoginUser(data);
-      console.log(data)
+      console.log(data);
     } catch (e) {
       /* handle error */
       console.log("ha ocurrido un error");
@@ -35,7 +35,7 @@ export const LoginPage = () => {
               <div className="col-md-7">
                 <div className="d-flex align-items-center justify-content-center">
                   <h3 className="align-items-center justify-content-center">
-                    <strong>Login</strong>
+                    <strong>Ingresar</strong>
                   </h3>
                 </div>
                 <hr />

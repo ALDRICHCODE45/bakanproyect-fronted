@@ -47,7 +47,7 @@ export const useAuthStore = () => {
       dispatch(loadProducts(products));
       dispatch(login(JSON.parse(user)));
     }
-  }, []);
+  }, [user]);
 
   return {
     //methods

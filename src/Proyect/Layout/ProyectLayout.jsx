@@ -9,6 +9,7 @@ import {
   GlobalOutlined,
   ShoppingFilled,
   ExclamationCircleOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
 
 const { confirm } = Modal;
@@ -151,6 +152,11 @@ export const ProyectLayout = ({ children }) => {
               danger
               onClick={() => onLogOutUser()}
               style={{ marginLeft: 16 }}
+              icon={
+                <LogoutOutlined
+                  style={{ fontSize: "16px", fontWeight: "bold" }}
+                />
+              }
             >
               Salir
             </Button>
